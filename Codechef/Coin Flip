@@ -20,3 +20,23 @@ for _ in range(t):
             print(H)
         else:
             print(T)
+
+
+//c++ solution 
+#include <bits/stdc++.h>
+#define int long long
+using namespace std;
+
+signed main()
+{
+    int t;   cin>>t;
+    while(t--){
+        int g;  cin>>g;
+        while(g--){
+            int i,n,q;  cin>>i>>n>>q;
+            if(q==i)  cout << n/2 << "\n";
+            else  cout << (n+1)/2 << "\n";
+        }
+    }
+    return 0;
+}
