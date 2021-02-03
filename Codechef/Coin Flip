@@ -1,0 +1,22 @@
+# cook your dish here
+# cook your dish here
+t=int(input())
+for _ in range(t):
+    a=int(input())
+    for _ in range(a):
+        i,n,q=map(int,input().split())
+        if n%2==0:
+            H=T=n//2
+        else:
+            
+            if i == 1:
+                T = ((n // 2)+1)
+                H = int(n)-T
+            else:
+                H = ((n // 2)+ 1)
+                T = n-H
+        
+        if q == 1:
+            print(H)
+        else:
+            print(T)
