@@ -1,98 +1,77 @@
+
+#DaRk DeveloPer
+
 import sys
 
 # taking input as string
-# input = lambda: sys.stdin.readline().rstrip("\r\n")
-# inp = lambda: list(map(int,sys.stdin.readline().rstrip("\r\n").split()))
-import time
-
+input = lambda: sys.stdin.readline().rstrip("\r\n")
+inp = lambda: list(map(int, sys.stdin.readline().rstrip("\r\n").split()))
 mod = 10 ** 9 + 7;
 Mod = 998244353;
 INF = float('inf')
-
-
 # ______________________________________________________________________________________________________
-# from math import *
-# from bisect import *
-# from heapq import *
-# from collections import defaultdict as dd
-# from collections import OrderedDict as odict
-# from collections import Counter as cc
-# from collections import deque
-# from itertools import groupby
-# sys.setrecursionlimit(20*20*20*20+10) #this is must for dfs
+from math import *
+from bisect import *
+from heapq import *
+from collections import defaultdict as dd
+from collections import OrderedDict as odict
+from collections import Counter as cc
+from collections import deque
+from itertools import groupby
+
+sys.setrecursionlimit(20 * 20 * 20 * 20 + 10)  # this is must for dfs
+MAX = 10 ** 5
 
 
-def isPalindrome(head) -> bool:
-    stack = []
+def second():
 
-    slow = head
 
-    while slow != None:
-        stack.append(slow.val)
+	matrix=[[0]*1000]*1000
 
-        slow = slow.next
-    p = True
-    start = head
-    while len(stack) > 0:
-        l = stack.pop()
+	for i in range(1000):
 
-        if start.val != l:
-            p = False
-            break
-        print(l, start.val)
-        print(stack)
+		matrix[i][0]=(i*(i+1))//2
 
-    return p
+        print(matrix)
+        for j in range(1,1000):
+			matrix[i][j]=matrix[i-1][j]+j-1+i-1
 
+
+	return matrix
 
 def solve():
-    n, k = 6,10
-    #n, k = takeivr()
-    #arr = takeiar()
-    arr = [2,8,8 ,2 ,2,8]
 
-    arr.sort(reverse=True)
-    #print(arr)
+	global matrix
 
+	r1,c1,r2,c2=takeivr()
 
-    count = 0
+	count=0
+
+	for i in range(r1-1,r2):
+
+		count+=matrix[i][c1]
+	print(matrix)
    
-
-    while len(arr) > 0:
-
-        height = k
-        i = 0
-        while height > 0 and len(arr) > 0 and i<len(arr):
-            if arr[i] <= height:
-                height -= arr[i]
-                arr.remove(arr[i])
-            i+=1
-
-        #print(arr)
-        count += 1
-    
-
-
-    print(count)
 
 
 def main():
     global tt
+
+
     if not ONLINE_JUDGE:
         sys.stdin = open("input.txt", "r")
         sys.stdout = open("output.txt", "w")
     t = 1
-    #t = takein()
-    #t = 1
+    t = takein()
+    # t = 1
     for tt in range(1, t + 1):
         solve()
     if not ONLINE_JUDGE:
-        # print("Time Elapsed :",time.time() - start_time,"seconds")
+        print("Time Elapsed :", time.time() - start_time, "seconds")
         sys.stdout.close()
 
 
 # ---------------------- USER DEFINED INPUT FUNCTIONS ----------------------#
-# for the itnteger input
 def takein():
     return (int(sys.stdin.readline().rstrip("\r\n")))
 
@@ -108,7 +87,7 @@ def takeiar():
     return (list(map(int, sys.stdin.readline().rstrip("\r\n").split())))
 
 
-# input sttring array
+# input string array
 def takesar():
     return (list(map(str, sys.stdin.readline().rstrip("\r\n").split())))
 
@@ -118,11 +97,35 @@ def takeivr():
     return (map(int, sys.stdin.readline().rstrip("\r\n").split()))
 
 
-def inpsvr():
+def takesvr():
     return (map(str, sys.stdin.readline().rstrip("\r\n").split()))
 
 
 # ------------------ USER DEFINED PROGRAMMING FUNCTIONS ------------------#
+
+
+def ispalindrome(s):
+    return s == s[::-1]
+
+
+def invert(bit_s):
+    # convert binary string
+    # into integer
+    temp = int(bit_s, 2)
+
+    # applying Ex-or operator
+    # b/w 10 and 31
+    inverse_s = temp ^ (2 ** (len(bit_s) + 1) - 1)
+
+    # convert the integer result
+    # into binary result and then
+    # slicing of the '0b1'
+    # binary indicator
+    rslt = bin(inverse_s)[3:]
+
+    return str(rslt)
+
+
 def counter(a):
     q = [0] * max(a)
     for i in range(len(a)):
@@ -201,9 +204,20 @@ def seive(n):
     return (a)
 
 
+def isprime(n):
+    if (n > 2 and not n % 2) or n == 1:
+        return False
+
+
+    for i in range(3, int(n ** 0.5 + 1), 2):
+        if not n % i:
+            return False
+
+    return True
+
 # -----------------------------------------------------------------------#
 ONLINE_JUDGE = __debug__
 if ONLINE_JUDGE:
     input = sys.stdin.readline
-
+matrix=second()
 main()

@@ -1,91 +1,66 @@
-# DaRk Developer
+
+#DaRk DeveloPer
 
 import sys
 
-
 # taking input as string
-# input = lambda: sys.stdin.readline().rstrip("\r\n")
-# inp = lambda: list(map(int,sys.stdin.readline().rstrip("\r\n").split()))
-import time
-
+input = lambda: sys.stdin.readline().rstrip("\r\n")
+inp = lambda: list(map(int, sys.stdin.readline().rstrip("\r\n").split()))
 mod = 10 ** 9 + 7;
 Mod = 998244353;
 INF = float('inf')
 # ______________________________________________________________________________________________________
-# from math import *
-# from bisect import *
-# from heapq import *
+from math import *
+from bisect import *
+from heapq import *
 from collections import defaultdict as dd
+from collections import OrderedDict as odict
+from collections import Counter as cc
+from collections import deque
+from itertools import groupby
 
-# from collections import OrderedDict as odict
-# from collections import Counter as cc
-# from collections import deque
-# from itertools import groupby
-# sys.setrecursionlimit(20*20*20*20+10) #this is must for dfs
-
-
-dia = [0] * (10 ** 5)
+sys.setrecursionlimit(20 * 20 * 20 * 20 + 10)  # this is must for dfs
+MAX = 10 ** 5
 
 
-def bfs(node, adj, n):
-    global dia
-
-    visited = [0] * (n + 11)
-
-    queue = []
-    queue.append(node)
-
-    visited[node] = 1
-    print("somethig")
-    '''
-
-    while queue:
-
-        u=queue.pop(0)
-
-        for i in range(len(adj[u])):
-
-            if visited[adj[u][i]]==0:
-                visited[adj[u][i]]=1
-
-                dia[adj[u][i]]+=1
-                queue.append(adj[u][i])
-    '''
-    print(dia)
-
+# question link:-https://www.geeksforgeeks.org/numbers-prime-frequencies-greater-equal-k/
 
 def solve():
-    n = takein()
 
-    if n == 1:
-        print(0)
-        return
+	n=takein()
+	arr=takeiar()
+	dict_1=dd(lambda:0)
+	ans=0
+	summ=0
 
-    adj = dd(list)
+	for i in range(n):
+		summ+=dict_1[arr[i]]
+		ans+=summ
+		dict_1[arr[i]]+=i+1
+		print(dict_1)
+		print(summ,ans)
 
-    for i in range(n - 1):
-        n, m = takeivr()
-        adj[n].append(m)
-        adj[m].append(n)
-
-    bfs(1, adj, n)
+	print(ans)
+	return 
+   
 
 
 def main():
     global tt
+
+
     if not ONLINE_JUDGE:
         sys.stdin = open("input.txt", "r")
         sys.stdout = open("output.txt", "w")
     t = 1
-    # t = takein()
+    t = takein()
     # t = 1
     for tt in range(1, t + 1):
         solve()
-    '''
     if not ONLINE_JUDGE:
         print("Time Elapsed :", time.time() - start_time, "seconds")
         sys.stdout.close()
-    '''
+
 
 # ---------------------- USER DEFINED INPUT FUNCTIONS ----------------------#
 def takein():
@@ -219,6 +194,17 @@ def seive(n):
             a.append(p)
     return (a)
 
+
+def isprime(n):
+    if (n > 2 and not n % 2) or n == 1:
+        return False
+
+
+    for i in range(3, int(n ** 0.5 + 1), 2):
+        if not n % i:
+            return False
+
+    return True
 
 # -----------------------------------------------------------------------#
 ONLINE_JUDGE = __debug__
