@@ -23,3 +23,6 @@ class Solution:
 		    right+=1
 		    
 		return ans 
+
+
+print(27^2)
