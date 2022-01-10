@@ -83,3 +83,5 @@ for _ in range(int(input())):
     else:
       
         rec(arr,n,sum(arr)//2)
+
+ 
